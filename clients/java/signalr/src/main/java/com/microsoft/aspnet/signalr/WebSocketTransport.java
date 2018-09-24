@@ -44,7 +44,7 @@ class WebSocketTransport implements Transport {
     }
 
     @Override
-    public CompletableFuture start() {
+    public CompletableFuture<Void> start() {
         return CompletableFuture.runAsync(() -> {
             logger.log(LogLevel.Debug, "Starting Websocket connection.");
             webSocketClient = createWebSocket(headers);
@@ -64,7 +64,7 @@ class WebSocketTransport implements Transport {
     }
 
     @Override
-    public CompletableFuture send(String message) {
+    public CompletableFuture<Void> send(String message) {
         return CompletableFuture.runAsync(() -> webSocketClient.send(message));
     }
 
@@ -80,7 +80,7 @@ class WebSocketTransport implements Transport {
     }
 
     @Override
-    public CompletableFuture stop() {
+    public CompletableFuture<Void> stop() {
         return CompletableFuture.runAsync(() -> {
             webSocketClient.closeConnection(0, "HubConnection Stopped");
             logger.log(LogLevel.Information, "WebSocket connection stopped");
