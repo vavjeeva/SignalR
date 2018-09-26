@@ -222,7 +222,7 @@ public class HubConnection {
 
         return handleNegotiate().thenCompose((response) -> {
             if (response.getRedirectUrl() != null && negotiateAttempts >= MAX_NEGOTIATE_ATTEMPTS) {
-                throw new RuntimeException("todo");
+                throw new RuntimeException("Negotiate redirection limit exceeded.");
             }
 
             if (response.getRedirectUrl() == null) {
